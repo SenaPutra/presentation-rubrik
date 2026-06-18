@@ -1,131 +1,100 @@
-# RuBrik — Ruang Pabrik Presentation
+# RuBrik — Ruang Pabrik Interactive Presentation
 
-Browser-based, full-viewport HTML slide deck for **RuBrik — Mading Digital Internal Pabrik**. The deck transforms `rubrik.md` into a polished internal competition presentation for HR, Change Management, management stakeholders, and non-technical audiences.
+RuBrik is a cinematic, interactive HTML presentation for **“RuBrik — Ruang Pabrik”**, an internal factory digital notice board and employee collaboration platform built entirely on Google Workspace.
 
-## Project Overview
+The deck uses a fun industrial factory control-room style with tasteful office-friendly humor, motion, keyboard navigation, slide overview, presenter notes, sound toggle, corporate mode, confetti, and multiple interactive demos.
 
-RuBrik is presented as one internal factory space for information, communication, and collaboration. The deck covers:
+## How to Run
 
-- Current employee communication pain points.
-- The six RuBrik rooms: Pengumuman, Koran Harian, Obrolan Warkop, Lapak Jualan, Agenda, and Factory Wire.
-- Google Workspace architecture and data flow.
-- Admin CMS and Google Sheets backbone.
-- Estimated efficiency value with validation disclaimers.
-- Four-week implementation roadmap and closing CTA.
+Open `index.html` directly in a modern browser. No backend, build process, or package installation is required.
 
-The presentation is a static site: no backend, authentication, build step, or framework required.
-
-## How to Run Locally
-
-Open directly:
-
-```bash
-open index.html
-```
-
-Or run a simple static server from the project root:
+For the most reliable local testing, you may serve the folder with a static server:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then visit:
+Then open `http://localhost:8000`.
 
-```text
-http://localhost:8000
-```
+## Keyboard Controls
 
-A local server is recommended because some browsers apply stricter rules to local `file://` pages.
+| Key | Action |
+|---|---|
+| Arrow Right / Page Down / Space | Next slide |
+| Arrow Left / Page Up | Previous slide |
+| Home | First slide |
+| End | Final slide |
+| Escape | Toggle slide overview |
+| F | Toggle fullscreen |
+| M | Toggle sound |
+| N | Toggle private speaker notes |
+| A | Applause/confetti shortcut |
+| Number keys | Jump to a specific slide number |
+| Konami code | Activates Overtime Mode |
 
-## File Structure
+Mouse wheel navigation is debounced to prevent accidental multi-slide skipping. Touch devices support swipe navigation.
 
-```text
-/
-├── index.html          # Slide content and semantic presentation structure
-├── styles.css          # Industrial dark theme, layouts, responsive styles, animations
-├── app.js              # Slide navigation, fullscreen, overview, counters, touch/wheel controls
-├── README.md           # Project documentation
-├── rubrik.md           # Source Markdown content
-└── assets/
-    └── README.md       # Notes for optional assets
-```
+## Fullscreen Instructions
 
-## Navigation Controls
+Press `F` or click the `⛶` control in the bottom-right presenter controls. Browser fullscreen permission may require user interaction first.
 
-- `Arrow Right` / `Arrow Down`: next slide
-- `Space`: next slide
-- `Arrow Left` / `Arrow Up`: previous slide
-- `Home`: first slide
-- `End`: last slide
-- `F`: toggle fullscreen
-- `O`: toggle slide overview
-- `Escape`: close overview
-- Mouse wheel: slide navigation with throttling
-- Touch swipe: mobile/tablet navigation
-- Bottom progress bar: jump to any slide
-- Bottom-right controls: previous, overview, fullscreen, next
+## How to Disable Sounds
+
+Press `M` or click the `Sound On/Sound Off` button in the top HUD. Sounds are generated with Web Audio and are intentionally subtle.
 
 ## How to Edit Slide Content
 
-Slide content lives in `index.html`. Each slide is a `<section class="slide">` inside `<main id="deck">`.
-
-Recommended editing workflow:
-
-1. Keep each slide focused on one main message.
-2. Prefer short headlines and concise supporting text.
-3. Use existing reusable classes such as `.cards`, `.metrics`, `.flow`, `.split`, `.chips`, `.dashboard`, and `.roadmap`.
-4. Keep disclaimers on estimated market and strategic-impact claims.
-5. Avoid placing long tables directly into slides; convert them into cards, flows, or metric blocks.
-
-## How to Replace Assets
-
-The current deck uses CSS-generated industrial visuals and Lucide icons loaded via CDN. To use approved company imagery:
-
-1. Add files to `assets/`.
-2. Reference them from `index.html` or `styles.css` using paths like `assets/your-image.png`.
-3. Add meaningful `alt` text for content images.
-4. Compress large images before presenting on projector hardware.
-
-## Deployment
-
-### GitHub Pages
-
-1. Push the repository to GitHub.
-2. Go to **Settings → Pages**.
-3. Select the current branch and root folder.
-4. Save and open the generated Pages URL.
-
-### Netlify
-
-1. Drag the project folder into Netlify Drop, or connect the Git repository.
-2. Build command: leave empty.
-3. Publish directory: `/`.
-
-### Other Static Hosts
-
-Upload `index.html`, `styles.css`, `app.js`, and `assets/` to any static host. No server-side runtime is required.
-
-## Embed in Google Sites
-
-1. Deploy the deck to a public or organization-accessible static URL.
-2. In Google Sites, choose **Embed → Embed code**.
-3. Use an iframe similar to:
+Slide markup lives in `index.html`. Each slide is a `<section class="slide">` with metadata attributes:
 
 ```html
-<iframe
-  src="https://your-host.example/rubrik/"
-  width="100%"
-  height="720"
-  style="border:0;"
-  allowfullscreen>
-</iframe>
+<section class="slide" data-section="FITUR" data-title="Feature Control Panel" data-notes="Presenter note here">
 ```
 
-For best presentation quality, open the deck directly in a browser and use fullscreen mode.
+Edit visible text directly inside the corresponding slide section.
 
-## Known Browser Limitations
+## How to Add or Remove Slides
 
-- Fullscreen requires a user gesture and may be restricted inside some iframes unless `allowfullscreen` is enabled.
-- CDN fonts and Lucide icons require internet access; the deck remains readable if fonts fail, but icons may not render.
-- Some mobile browsers hide browser chrome dynamically, changing viewport height during presentation.
-- `prefers-reduced-motion` disables non-essential animation for accessibility.
+1. Add or remove a `<section class="slide">` in `index.html`.
+2. Keep the first slide marked with `class="slide active"`.
+3. The JavaScript automatically rebuilds the progress bar, slide counter, and overview from the slide list.
+4. If you add custom interactions, place them in `script.js`.
+
+## How to Customize Colors
+
+Colors are controlled by CSS custom properties at the top of `styles.css`:
+
+```css
+:root {
+  --charcoal: #111616;
+  --yellow: #f6c542;
+  --orange: #ff8a2a;
+}
+```
+
+Change these variables to adjust the theme globally.
+
+## How to Replace Sample Content
+
+Sample Warkop aliases, marketplace cards, calendar events, ticker text, and poll choices are harmless presentation samples. Replace them in `index.html` with approved company-safe content before a formal presentation.
+
+## Browser Compatibility
+
+Recommended browsers:
+
+- Chrome / Edge latest
+- Firefox latest
+- Safari latest
+
+The presentation uses standard HTML, CSS, and vanilla JavaScript. If Web Audio or Fullscreen APIs are unavailable, the deck still works without those enhancements.
+
+## Troubleshooting
+
+- **Fonts do not load:** the deck falls back to system fonts.
+- **Fullscreen does not activate:** click inside the page first, then press `F`.
+- **No sound:** check browser audio policy and the RuBrik sound toggle.
+- **Animations feel too much:** enable OS-level “reduced motion” or use Corporate Mode.
+- **Slide content too large:** present at 16:9 and use browser zoom at 90–100%.
+
+## Recommended Presentation Resolution
+
+Best experience: **1920×1080**. Tested layout target: **1366×768** and larger 16:9 laptop/projector screens.

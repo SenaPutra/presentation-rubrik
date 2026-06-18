@@ -3,7 +3,7 @@
   const progress = document.getElementById('progress');
   const counter = document.getElementById('counter');
   const overview = document.getElementById('overview');
-  let index = 0, wheelLock = false, touchStartX = 0, touchStartY = 0;
+  let index = 0, wheelLock = false, touchStartX = 0, touchStartY = 0, finaleCelebrated = false;
 
   const clamp = n => Math.max(0, Math.min(slides.length - 1, n));
   const renderProgress = () => {
@@ -16,8 +16,38 @@
     index = next;
     slides[index].classList.add('active');
     slides[index].querySelectorAll('[data-count]').forEach(animateCounter);
+    if (index === slides.length - 1) launchConfetti();
     renderProgress();
   };
+
+  const launchConfetti = () => {
+    if (finaleCelebrated || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    finaleCelebrated = true;
+    const colors = ['#ff4d8b', '#1a3a3a', '#b8a4ed', '#ffb084', '#e8b94a', '#a4d4c5', '#ff6b5a'];
+    for (let i = 0; i < 90; i++) {
+      const piece = document.createElement('span');
+      piece.className = 'confetti';
+      piece.style.left = `${Math.random() * 100}vw`;
+      piece.style.background = colors[i % colors.length];
+      piece.style.animationDelay = `${Math.random() * .55}s`;
+      piece.style.transform = `rotate(${Math.random() * 180}deg)`;
+      document.body.appendChild(piece);
+      piece.addEventListener('animationend', () => piece.remove(), {once:true});
+    }
+  };
+  const triggerBomb = button => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rect = button.getBoundingClientRect();
+    button.classList.add('boom');
+    const blast = document.createElement('span');
+    blast.className = 'explosion';
+    blast.style.left = `${rect.left + rect.width / 2}px`;
+    blast.style.top = `${rect.top + rect.height / 2}px`;
+    document.body.appendChild(blast);
+    blast.addEventListener('animationend', () => blast.remove(), {once:true});
+    setTimeout(() => button.classList.remove('boom'), 260);
+  };
+
   const animateCounter = el => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || el.dataset.done) return;
     el.dataset.done = 'true';
@@ -41,6 +71,7 @@
   document.addEventListener('click', e => {
     const slideBtn = e.target.closest('[data-slide]'); if (slideBtn) goTo(+slideBtn.dataset.slide);
     const thumb = e.target.closest('[data-thumb]'); if (thumb) { toggleOverview(false); goTo(+thumb.dataset.thumb); }
+    const bomb = e.target.closest('.demo-bomb'); if (bomb) triggerBomb(bomb);
     const goto = e.target.closest('[data-goto]'); if (goto) goTo(+goto.dataset.goto);
   });
   document.addEventListener('keydown', e => {

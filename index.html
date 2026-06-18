@@ -3,46 +3,121 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RuBrik — Magical Chalk World</title>
-  <meta name="description" content="Presentasi interaktif RuBrik — Ruang Pabrik, Mading Digital Internal Pabrik.">
+  <title>RuBrik Wildlife Park — The Information Zoo</title>
+  <meta name="description" content="RuBrik Wildlife Park — Ruang Pabrik, Mading Digital Internal Pabrik.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Schoolbell&family=Inter:wght@500;700;900&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito+Sans:wght@500;700;900&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="confettiCanvas"></canvas><canvas id="drawCanvas"></canvas>
-  <div id="chalkTip" aria-hidden="true"></div><div id="toast" role="status"></div>
-  <header id="hud" class="hud">
-    <b>RuBrik Chalk World</b><span id="sectionIndicator">PORTAL 01</span><span id="counter">1 / 18</span>
-    <button id="notesBtn" title="N">Notes</button><button id="soundBtn" title="M">Sound On</button><label><input id="corpToggle" type="checkbox"> SERIOUS CLASS MODE</label><button id="panicBtn">PANIC</button>
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="monkeyRun" aria-hidden="true">🐒</div>
+  <header class="hud" aria-label="Safari presentation controls">
+    <strong>RuBrik Wildlife Park</strong>
+    <span id="zoneName">Zoo Gate Opening</span>
+    <span id="counter" class="ticket">HABITAT 01 / 18</span>
+    <button id="overviewBtn" type="button">Map</button>
+    <button id="fullscreenBtn" type="button">Fullscreen</button>
+    <button id="soundBtn" type="button" aria-pressed="false">Sound Off</button>
+    <label class="tour"><input id="tourToggle" type="checkbox"> Management Tour</label>
+    <button id="panicBtn" type="button">RELEASE THE MONKEY</button>
   </header>
-  <div class="progress"><i id="progressLine"></i></div>
-  <aside id="notes" class="notes"></aside>
+  <nav class="safari-progress" aria-label="Safari trail progress"><i id="progressLine"></i><b id="jeep">🚙</b></nav>
+  <aside id="stampShelf" aria-label="Safari stamp collection"></aside>
   <div id="overview" class="overview" aria-hidden="true"></div>
-  <main id="deck" class="board-shell">
-    <div class="portal-ring" aria-hidden="true"></div><div class="chalk-teacher" aria-hidden="true"><span></span><b>Prof. Kapur</b></div><div class="tiny-creatures" aria-hidden="true"><i>✦</i><i>✉</i><i>☕</i></div>
-    <div class="wood top"></div><div class="wood bottom"><span class="chalk c1"></span><span class="chalk c2"></span><span class="chalk c3"></span><span class="eraser"></span></div><div class="wood left"></div><div class="wood right"></div>
-    <section class="slide active opening world-opening" data-section="PORTAL 01" data-notes="Opening: classroom lights on, invite audience to start."><p class="lesson">PORTAL 01</p><h1 class="write">RuBrik World</h1><h2 class="write delay">Portal Kapur Terbuka</h2><p class="subtitle">Masuk ke kota chalk hidup tempat informasi pabrik akhirnya punya rumah.</p><p class="teacher-note">Prof. Kapur says: follow the glowing chalk road.</p><button class="cta" id="startBtn">BUKA PORTAL</button><div class="zone-art portal">◎</div></section>
-    <section class="slide canyon-zone" data-section="PROBLEM" data-notes="Problem: information is scattered and truth is hard to verify."><p class="lesson">LESSON 02</p><h2>Chaos Canyon of Lost Information</h2><div class="zone-art canyon">〰 〰 〰</div><div class="messy"><span>✉ Email</span><span>💬 WhatsApp</span><span>📌 Papan fisik</span><span>📄 PDF lama</span><span>🔗 Link random</span><span>“Katanya kemarin ada pengumuman”</span></div><div class="problems"><b>Informasi tersebar</b><b>Tidak ada single source of truth</b><b>Karyawan baru bingung</b><b>Ide tenggelam</b></div><p class="quote">Problem utama: semua orang punya info, tapi belum tentu versi yang benar.</p><p class="joke">Internal communication should not be urban legend.</p></section>
-    <section class="slide plaza-zone" data-section="SOLUTION" data-notes="Introduce RuBrik as one living board for six rooms."><p class="lesson">LESSON 03</p><h2>RuBrik Central Plaza</h2><div class="zone-art plaza">⌂ ✦ ⌂</div><div class="mindmap"><div class="core">RuBrik</div><span>Pengumuman</span><span>Koran Harian</span><span>Obrolan Warkop</span><span>Lapak Jualan</span><span>Agenda</span><span>Factory Wire</span></div><p class="quote">Satu platform. Enam ruang. Nol drama pindah-pindah tab.</p></section>
-    <section class="slide district-zone" data-section="FEATURES" data-notes="Click all cards to unlock achievement."><p class="lesson">LESSON 04</p><h2>Six Chalk Districts</h2><p class="subtitle">Enam distrik hidup mengatur arus informasi kota RuBrik.</p><div id="featureCards" class="feature-cards"></div><div class="meter"><span>Activation meter</span><i id="featureMeter"></i></div><h3 id="featureAchievement"></h3></section>
-    <section class="slide tower-zone" data-section="PENGUMUMAN"><p class="lesson">MODULE 01</p><h2>Announcement Tower</h2><div class="zone-art tower">▵ 📣 ▵</div><div class="flow"><span>HR Email</span><span>RuBrik CC</span><span>Apps Script Parsing</span><span>CMS Draft</span><span>Admin Review</span><span>Published</span></div><div class="stamps"><b>DRAFT</b><b>REVIEWED</b><b>PUBLISHED</b></div><ul class="two-col"><li>Countdown</li><li>Pin announcement</li><li>Multi-image gallery</li><li>Category badge</li><li>Gmail integration</li><li>Admin review</li></ul><p class="joke">Forwarded message pension dini.</p></section>
-    <section class="slide river-zone" data-section="KORAN"><p class="lesson">MODULE 02</p><h2>Newsprint River</h2><div class="zone-art river">≈ 🐟 📰 ≈</div><div class="tags"><span>Financial</span><span>Banking</span><span>Trading</span><span>Loyalty</span><span>Technology</span><span>AI</span><span>Marketing</span></div><p>Sources: Kontan • CNBC Indonesia • Katadata • Tech in Asia Indonesia</p><div class="formula">RSS Sources + Topic Filter + Deduplication = Koran Harian</div><p class="teacher-note">Supaya karyawan dapat asupan informasi, bukan cuma asupan meeting invite.</p><div class="literacy"><i></i><b>Literacy meter</b></div></section>
-    <section class="slide cave-zone" data-section="WARKOP"><p class="lesson">MODULE 03</p><h2>Anonymous Coffee Cave</h2><div class="zone-art cave">☕ ◉ ◉ ☕</div><div class="bubbles"><span>Kuli Shift Pagi #7749</span><span>Mandor Blok A #3321</span><span>Operator Mesin Kopi #9921</span></div><div class="flow"><span>Submitted</span><span>Pending</span><span>Admin Review</span><span>Published</span><span>Discussion</span></div><div class="stamps"><b>APPROVED</b><b>REJECTED</b><b>PUBLISHED</b></div><p class="quote">Anonymous, but not lawless.</p><div class="coffee"><i></i></div></section>
-    <section class="slide street-zone" data-section="LAPAK"><p class="lesson">MODULE 04</p><h2>Marketplace Street</h2><div class="zone-art market-street">⌂ 🛒 ⌂</div><div class="market"><article>Risol Shift Pagi</article><article>Kopi Anti Mengantuk</article><article>Jasa Desain Banner Deadline Mendadak</article><article>Tanaman Meja Anti Burnout</article><article>Foto Produk Modal Ring Light</article></div><div class="flow"><span>Submit Listing</span><span>Admin Review</span><span>Published</span><span>Contact Seller</span></div><p><b class="badge">0% Platform Fee</b> <b class="badge">100% Support Teman Kantor</b></p><p class="joke">In this economy, support UMKM is not optional. It is survival.</p></section>
-    <section class="slide island-zone" data-section="AGENDA"><p class="lesson">MODULE 05</p><h2>Calendar Clock Island</h2><div class="zone-art clock-island">◷</div><code class="code">CalendarApp.getDefaultCalendar()</code><ul class="two-col"><li>Real-time Google Calendar</li><li>14 days ahead</li><li>No manual sync</li><li>Configurable via Settings</li></ul><div class="timetable"><span>Meeting Bahas Meeting</span><span>Lunch yang Berubah Jadi Meeting</span><span>Focus Time Tapi Tetap Diinvite</span><span>RuBrik Demo</span></div><label class="switch"><input id="pretendToggle" type="checkbox"> Show meetings I pretend not to see</label></section>
-    <section class="slide railway-zone" data-section="WIRE"><p class="lesson">MODULE 06</p><h2>Running Ticker Railway</h2><div class="zone-art railway">🚂 ═══</div><div class="ticker"><span>Pengumuman baru diterbitkan • Risol tersisa 3 • Meeting pindah ruangan • Isi timesheet sebelum menjadi sejarah • Printer kembali normal tanpa alasan jelas •</span></div><button class="cta" id="breakingBtn">ACTIVATE BREAKING NEWS MODE</button><h3 id="breakingMsg">BREAKING NEWS:<br>Link presentasi akhirnya ditemukan di grup yang benar.</h3></section>
-    <section class="slide academy-zone" data-section="ARCHITECTURE"><p class="lesson">LESSON 11</p><h2>Pipe Maze Academy</h2><div class="zone-art pipes">╔═╦═╗</div><div class="layers"><article>Tampilan<br><small>Landing GAS Project</small></article><article>Logika<br><small>CMS GAS Project • RSS Fetcher</small></article><article>Data<br><small>Shared Spreadsheet • Drive • Gmail • Calendar</small></article></div><div class="diagram">Landing ↓ Shared Spreadsheet ↑ CMS</div><button id="engBtn">Explain Like Engineer</button><button id="mgmtBtn">Explain Like Management</button><ul id="archList"><li>landing.gs</li><li>cms.gs</li><li>rss-fetcher.gs</li><li>email-fetcher.gs</li></ul><p class="joke">Same architecture. Different vocabulary.</p></section>
-    <section class="slide classroom-zone" data-section="CMS"><p class="lesson">LESSON 12</p><h2>Admin Control Classroom</h2><div class="zone-art classroom">▤ ✎ ▤</div><div class="cms"><aside>Dashboard<br>Pengumuman CRUD<br>News Management<br>Forum Moderation<br>Marketplace Approval<br>Settings<br>Quick Links</aside><main><b>Pending: <em id="pending">7</em></b><b>Published: <em id="published">18</em></b><button id="approveBtn">Approve Pending Item</button><button id="dangerBtn">Do Not Click</button></main></div></section>
-    <section class="slide castle-zone" data-section="SHEETS"><p class="lesson">LESSON 13</p><h2>Spreadsheet Castle</h2><div class="zone-art castle">▥ 🏰 ▥</div><h3><span class="cross">DATABASE</span> GOOGLE SHEETS</h3><p>Please remain calm.</p><div class="racks"><span>Settings</span><span>Announcements</span><span>News</span><span>Forum</span><span>ForumComments</span><span>Marketplace</span><span>Ticker</span><span>QuickLinks</span><span>RSS_Sources</span><span>RSS_Topics</span></div><div class="formula">One Spreadsheet + Two Apps = One Source of Truth</div><button id="runaway">Delete Sheet</button></section>
-    <section class="slide kingdom-zone" data-section="TOOLS"><p class="lesson">LESSON 14</p><h2>Google Workspace Tool Kingdom</h2><div class="zone-art kingdom">⚙ ✦ 🏰</div><div class="tools"><article>Google Apps Script = Automation Teacher</article><article>Google Sheets = Database Disguised as Spreadsheet</article><article>Google Sites = Front Door</article><article>Google Drive = File Warehouse</article><article>Gmail API = Inbox Scavenger</article><article>Google Calendar API = Meeting Radar</article></div><div class="formula big">Existing Google Workspace + Apps Script + Sheets = <span>Rp 0</span> Additional Platform Cost</div><b class="stamp">BUDGET FRIENDLY</b></section>
-    <section class="slide mountain-zone" data-section="SAVINGS"><p class="lesson">LESSON 15</p><h2>Budget Mountain</h2><div class="zone-art mountain">△ Rp 0 △</div><div class="bars"><b style="--w:90%">Old Process: 45–90 minutes</b><b style="--w:16%">RuBrik: Under 10 minutes</b></div><ul class="two-col"><li>Rp 0 additional platform cost</li><li>Around 80% faster distribution</li><li>Around 13 HR hours saved/month</li><li>35% productive hour recovery</li></ul><p class="disclaimer">Market and business impact numbers should be verified before formal proposal use.</p><p class="teacher-note">Angka bagus boleh. Angka ngawur jangan.</p></section>
-    <section class="slide temple-zone" data-section="STRATEGIC"><p class="lesson">LESSON 16</p><h2>Four Pillars Temple</h2><div class="zone-art temple">▥ ▥ ▥ ▥</div><div class="quadrants"><button>Retention<small>Better communication, less confusion.</small></button><button>Compliance<small>One official source. Fewer archaeology expeditions through old emails.</small></button><button>Innovation<small>Good ideas finally have an address.</small></button><button>Employer Branding<small>Culture is not a poster. It is an experience.</small></button></div><div class="gauge"><i id="gauge"></i><b>Organizational Signal Strength</b></div></section>
-    <section class="slide journey-zone" data-section="ROADMAP"><p class="lesson">LESSON 17</p><h2>Chalk Train Journey</h2><div class="zone-art train">🚂 ✦ ✦</div><div class="roadmap"><article>W1 — Deploy & Go-Live<small>Turn it on.</small></article><article>W2 — Admin Onboarding<small>Teach humans.</small></article><article>W3 — Populate Content<small>Add content before users ask why it is empty.</small></article><article>W4+ — Review & Iterate<small>Pretend every feedback was already on the roadmap.</small></article></div><div class="plane">✈</div><b class="stamp">READY FOR PRODUCTION</b></section>
-    <section class="slide festival-zone final" data-section="FINAL EXAM"><p class="lesson">FINAL EXAM</p><h2>Graduation Festival</h2><h3>RuBrik siap berjalan. Kapan kita mulai?</h3><div class="zone-art fireworks">✦ ✺ ✦</div><p>Built on Google Workspace.<br>Additional Platform Cost: <b>Rp 0</b>.</p><button class="cta" id="activateBtn">AKTIFKAN RUBRIK</button><div id="finalMsg"><b>RuBrik — Informasi Sekarang Punya Rumah.</b><br>CLASS DISMISSED.<br>DEPLOYMENT BEGINS.<br><button id="replayBtn">ULANGI KEBAHAGIAAN</button></div></section>
+
+  <main id="deck">
+    <section class="slide active gate" data-zone="Zoo Gate Opening" data-stamp="Park Guest">
+      <div class="vines"></div><p class="kicker">SAFARI 01</p><h1>RuBrik Wildlife Park</h1><h2>Ruang Pabrik</h2><p class="subtitle">Mading Digital Internal Pabrik</p>
+      <div class="gate-art" aria-hidden="true"><span></span><span></span><b>WELCOME</b></div>
+      <button class="cta" id="startBtn">ENTER THE PARK</button>
+      <p class="ranger-note"><b>RANGER NOTE:</b> Please keep your information inside designated habitats.</p>
+    </section>
+
+    <section class="slide chaos" data-zone="Information Jungle Chaos">
+      <p class="kicker">SAFARI 02</p><h2>Information Jungle Chaos</h2><h3>Informasi ada di mana-mana.<br>Petunjuknya tidak ada.</h3>
+      <div class="chaos-grid"><article>✉ Lost email birds</article><article>🌿 WhatsApp vines</article><article>🦴 Old PDF fossils</article><article>🪧 Broken direction signs</article><article>🧭 Confused employee with map</article><article>📋 Conflicting policy boards</article></div>
+      <ul class="plaque-list"><li>Information is scattered</li><li>No single source of truth</li><li>New employees are disoriented</li><li>Ideas have no structured channel</li></ul>
+      <p class="ranger-note warning"><b>WARNING:</b> Unmanaged information may become folklore.</p>
+    </section>
+
+    <section class="slide map" data-zone="RuBrik Main Zoo Map" data-stamp="Map Reader">
+      <p class="kicker">SAFARI 03</p><h2>RuBrik Main Zoo Map</h2><h3>One Platform. Six Habitats. One Clear Map.</h3>
+      <div class="zoo-map"><div class="plaza">RuBrik<br><small>Central Plaza</small></div></div>
+    </section>
+
+    <section class="slide activation" data-zone="Habitat Activation">
+      <p class="kicker">SAFARI 04</p><h2>Habitat Activation</h2><p class="subtitle">Click every habitat gate to make the park operational.</p>
+      <div id="featureCards" class="feature-cards"></div><div class="meter"><span>Operational meter</span><i id="featureMeter"></i></div><h3 id="featureAchievement"></h3>
+    </section>
+
+    <section class="slide habitat eagle" data-zone="Eagle Announcement Tower" data-stamp="Announcement Tower Visited">
+      <p class="kicker">HABITAT 05</p><h2>Eagle Announcement Tower</h2><div class="mascot eagle-svg" aria-label="Original eagle mascot"></div>
+      <div class="flow"><span>HR Email</span><span>RuBrik CC</span><span>Apps Script Parsing</span><span>CMS Draft</span><span>Admin Review</span><span>Published</span></div>
+      <ul class="plaque-list"><li>Countdown</li><li>Pin feature</li><li>Multi-image gallery</li><li>Category badge</li><li>Gmail integration creates announcement drafts</li><li>Admin review</li></ul><b class="badge ok">PUBLISHED</b><p class="joke">Forwarded message has officially retired.</p>
+    </section>
+
+    <section class="slide habitat owl" data-zone="Owl News Library" data-stamp="News Library Explored">
+      <p class="kicker">HABITAT 06</p><h2>Owl News Library</h2><div class="mascot owl-svg" aria-label="Original owl mascot"></div>
+      <div class="cards"><article>RSS article cards arrive</article><article>Owl sorts by topic</article><article>Duplicate articles removed</article><article>Maximum 5 articles per source</article><article>News placed into RuBrik</article></div>
+      <div class="tags"><span>Financial</span><span>Banking</span><span>Trading</span><span>Loyalty</span><span>Technology</span><span>AI</span><span>Marketing</span></div><p>Sources: Kontan • CNBC Indonesia • Katadata • Tech in Asia Indonesia</p><div class="meter literacy"><span>Literacy meter</span><i></i></div><p class="joke">Information diet: More industry news, fewer meeting invitations.</p>
+    </section>
+
+    <section class="slide habitat meerkat" data-zone="Meerkat Social Burrow" data-stamp="Anonymous Burrow Explorer">
+      <p class="kicker">HABITAT 07</p><h2>Meerkat Social Burrow</h2><div class="mascot meerkat-svg" aria-label="Original meerkat mascot"></div>
+      <div class="bubbles"><span>Kuli Shift Pagi #7749</span><span>Mandor Blok A #3321</span><span>Operator Mesin Kopi #9921</span></div><div class="flow"><span>Submitted</span><span>Pending</span><span>Admin Review</span><span>Published</span><span>Discussion</span></div><p><b class="badge ok">Approved</b><b class="badge no">Rejected</b><b class="badge">Hidden</b></p><h3>Anonymous, but not lawless.</h3>
+    </section>
+
+    <section class="slide habitat monkey" data-zone="Monkey Market Street" data-stamp="Marketplace Street Completed">
+      <p class="kicker">HABITAT 08</p><h2>Monkey Market Street</h2><div class="mascot monkey-svg" aria-label="Original monkey mascot"></div>
+      <div class="market"><article>Risol Shift Pagi</article><article>Kopi Anti Mengantuk</article><article>Jasa Desain Deadline Mendadak</article><article>Tanaman Meja Anti Burnout</article><article>Foto Produk Modal Ring Light</article></div><div class="flow"><span>Submit Listing</span><span>Admin Review</span><span>Published</span><span>Contact Seller</span></div><p><b class="badge ok">0% Platform Fee</b><b class="badge ok">100% Support Teman Kantor</b></p><button class="cta">CONTACT SELLER</button><p class="joke">In this economy, support UMKM is a survival strategy.</p>
+    </section>
+
+    <section class="slide habitat elephant" data-zone="Elephant Calendar Garden" data-stamp="Calendar Garden Cleared">
+      <p class="kicker">HABITAT 09</p><h2>Elephant Calendar Garden</h2><div class="mascot elephant-svg" aria-label="Original elephant mascot"></div><code>CalendarApp.getDefaultCalendar()</code>
+      <ul class="plaque-list"><li>Real-time personal Google Calendar</li><li>14-day range</li><li>Configurable through Settings</li><li>No manual synchronization</li></ul><div class="calendar-path"><span>Meeting Bahas Meeting</span><span>Lunch yang Berubah Jadi Meeting</span><span>Focus Time Tapi Tetap Diinvite</span><span>RuBrik Demo</span></div><label class="switch"><input id="pretendToggle" type="checkbox"> SHOW MEETINGS I PRETEND NOT TO SEE</label>
+    </section>
+
+    <section class="slide habitat cheetah" data-zone="Cheetah Express Track" data-stamp="Wire Runner">
+      <p class="kicker">HABITAT 10</p><h2>Cheetah Express Track</h2><div class="mascot cheetah-svg" aria-label="Original cheetah mascot"></div><div class="ticker"><span>Pengumuman baru diterbitkan • Risol tersisa tiga • Meeting pindah ruangan • Isi timesheet sebelum menjadi sejarah • Printer kembali normal tanpa alasan jelas •</span></div><button class="cta" id="breakingBtn">ACTIVATE BREAKING NEWS MODE</button><h3 id="breakingMsg">BREAKING NEWS:<br>Link presentasi ditemukan di grup yang benar.</h3>
+    </section>
+
+    <section class="slide architecture" data-zone="Wildlife Architecture Network">
+      <p class="kicker">SAFARI 11</p><h2>Wildlife Architecture Network</h2><div class="diagram"><b>Landing GAS Project</b><em>↓</em><b>Shared Spreadsheet ID</b><em>↑</em><b>CMS GAS Project</b></div><div class="tools"><article>Google Sheets</article><article>Google Drive</article><article>Gmail API</article><article>Google Calendar API</article><article>RSS Fetcher</article></div><p><button id="engBtn">ENGINEER VIEW</button> <button id="mgmtBtn">MANAGEMENT VIEW</button></p><ul id="archList" class="plaque-list"><li>landing.gs</li><li>cms.gs</li><li>rss-fetcher.gs</li><li>email-fetcher.gs</li></ul><p class="joke">Same ecosystem. Different vocabulary.</p>
+    </section>
+
+    <section class="slide cms" data-zone="Zookeeper Control Center" data-stamp="Wildlife Park Operator">
+      <p class="kicker">SAFARI 12</p><h2>Zookeeper Control Center</h2><div class="control-room"><aside>Dashboard<br>Announcement CRUD<br>News Management<br>Forum Moderation<br>Marketplace Approval<br>Settings<br>Quick Links</aside><main><b>Pending: <em id="pending">7</em></b><b>Published: <em id="published">18</em></b><button id="approveBtn">Approve Pending Item</button><button id="dangerBtn">DO NOT PRESS</button></main></div>
+    </section>
+
+    <section class="slide dam" data-zone="Beaver Data Dam" data-stamp="Spreadsheet Beaver">
+      <p class="kicker">SAFARI 13</p><h2>Beaver Data Dam</h2><div class="mascot beaver-svg" aria-label="Original beaver mascot"></div><div class="dam-tabs"><span>Settings</span><span>Announcements</span><span>News</span><span>Forum</span><span>ForumComments</span><span>Marketplace</span><span>Ticker</span><span>QuickLinks</span><span>RSS_Sources</span><span>RSS_Topics</span></div><h3>One Spreadsheet + Two Apps = One Source of Truth</h3><button id="runaway">DELETE SHEET</button><p class="ranger-note warning">Please do not feed the production spreadsheet.</p>
+    </section>
+
+    <section class="slide workspace" data-zone="Google Workspace Ecosystem" data-stamp="Zero Cost Legend">
+      <p class="kicker">SAFARI 14</p><h2>Google Workspace Ecosystem</h2><div class="tools"><article>Google Apps Script — Automation Ranger</article><article>Google Sheets — Data Habitat</article><article>Google Sites — Main Entrance</article><article>Google Drive — Storage Warehouse</article><article>Gmail API — Message Carrier</article><article>Google Calendar API — Schedule Keeper</article></div><h3>100% Google Workspace<br>Additional Platform Cost: Rp 0</h3><b class="badge ok">BUDGET FRIENDLY HABITAT</b>
+    </section>
+
+    <section class="slide budget" data-zone="Budget Mountain">
+      <p class="kicker">SAFARI 15</p><h2>Budget Mountain</h2><div class="race"><article>OLD PROCESS:<br><b>Tortoise Route — 45–90 minutes</b></article><article>RUBRIK:<br><b>Cheetah Route — under 10 minutes</b></article></div><ul class="plaque-list"><li>Rp 0 additional platform cost</li><li>Approximately 80% faster distribution</li><li>Approximately 13 HR hours saved per month</li><li>35% productive hour recovery</li></ul><p class="ranger-note warning"><b>RANGER NOTE:</b> Market and business-impact numbers must be verified before formal proposal use.</p><p class="joke">Good numbers are welcome. Imaginary numbers are not part of the exhibition.</p>
+    </section>
+
+    <section class="slide pillars" data-zone="Four Conservation Pillars">
+      <p class="kicker">SAFARI 16</p><h2>Four Conservation Pillars</h2><div class="quadrants"><button>Retention<small>Better communication, less confusion.</small></button><button>Compliance<small>One official source. Fewer archaeology expeditions through old emails.</small></button><button>Innovation<small>Good ideas finally have an address.</small></button><button>Employer Branding<small>Culture is not a poster. It is an experience.</small></button></div><div class="meter"><span>Organizational Signal Strength</span><i id="gauge"></i></div>
+    </section>
+
+    <section class="slide roadmap" data-zone="Safari Roadmap">
+      <p class="kicker">SAFARI 17</p><h2>Safari Roadmap</h2><div class="road"><article>W1 — Deploy & Go-Live<small>W1: Open the gate.</small></article><article>W2 — Admin Onboarding<small>W2: Train the rangers.</small></article><article>W3 — Populate Content<small>W3: Populate the habitats.</small></article><article>W4+ — Review & Iterate<small>W4+: Improve the park using visitor feedback.</small></article></div><b class="jeep-road">🚙</b><h3>READY FOR PRODUCTION</h3>
+    </section>
+
+    <section class="slide final" data-zone="Wildlife Festival Closing" data-stamp="Wildlife Festival">
+      <p class="kicker">FINAL SAFARI</p><h2>Wildlife Festival</h2><h3>RuBrik siap berjalan.<br>Kapan kita mulai?</h3><p>Built on Google Workspace.<br>Additional Platform Cost: <b>Rp 0</b>.</p><div class="mascot-row" aria-hidden="true"><span>Eagle</span><span>Owl</span><span>Meerkat</span><span>Monkey</span><span>Elephant</span><span>Cheetah</span></div><button class="cta" id="activateBtn">OPEN RUBRIK WILDLIFE PARK</button><div id="finalMsg"><b>RuBrik<br>Informasi Sekarang Punya Rumah.</b><br>THE PARK IS OPEN.<br>DEPLOYMENT BEGINS.<br><button id="replayBtn">REPLAY THE WILDLIFE FESTIVAL</button></div>
+    </section>
   </main>
-  <div id="quiz" class="modal"><div><h2>Pop Quiz</h2><p>Informasi internal paling sering hilang di mana?</p><button>Email</button><button>WhatsApp</button><button>Grup yang salah</button><button data-correct="1">Semua jawaban benar</button><b id="quizResult"></b></div></div>
+
+  <div id="quiz" class="modal" role="dialog" aria-modal="true" aria-label="Pop Quiz"><div><h2>Pop Quiz</h2><p>Informasi internal paling sering hilang di mana?</p><button>Email</button><button>WhatsApp</button><button>Grup yang salah</button><button data-correct="1">Semua jawaban benar</button><b id="quizResult"></b></div></div>
   <script src="script.js"></script>
 </body>
 </html>

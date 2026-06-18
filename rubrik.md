@@ -256,26 +256,7 @@ CalendarApp.getDefaultCalendar()
 
 ### Pola Akses
 
-```text
-┌─────────────────────────────┐
-│ Landing GAS Project         │
-│ Akses untuk karyawan        │
-└──────────────┬──────────────┘
-               │
-               │ Shared Spreadsheet ID
-               │
-┌──────────────▼──────────────┐
-│ Google Spreadsheet          │
-│ Single source of data       │
-└──────────────┬──────────────┘
-               │
-               │ Shared Spreadsheet ID
-               │
-┌──────────────▼──────────────┐
-│ CMS GAS Project             │
-│ Akses untuk admin           │
-└─────────────────────────────┘
-```
+
 
 > Dua Google Apps Script Project terpisah—Landing untuk karyawan dan CMS untuk admin—berbagi satu Spreadsheet ID. Satu titik data digunakan melalui dua jalur akses yang berbeda.
 

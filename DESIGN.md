@@ -1,286 +1,1518 @@
-## Overview
-
-Dell's December 1996 home page is a perfectly preserved fossil of catalog-era enterprise web design — the moment when a Fortune-100 brand decided the web was *important enough* to invest in, but two years before CSS would be widely adopted and three years before "design system" was a phrase anyone used. Every visual choice on the page is a downstream consequence of that constraint: layout via HTML tables, type via the browser's built-in font stack (Arial Black / Helvetica / Times Roman), color via 8-bit-safe flat fills, and decoration via hand-cut GIF "stickers" (the NEW! burst, the round PC Magazine Readers' Choice seal, the beveled "BUY a DELL" yellow tab). The page is bordered — literally bordered, in a 1-cell-wide black HTML table — and inside that frame, every product line gets a "ribbon card": a white title bar with a sharp black underline, a tinted body block in one of eight catalog colors (sage, salmon, peach, lime, sky, steel, periwinkle, olive), and a beveled product photograph notched into the right edge of the card.
-
-The brand voice carries through in two anchors: a vivid Dell-red CTA panel on the left of the homepage (cream-yellow Times Roman copy on a `{colors.primary}` fill, set inside the black frame) and a screaming red phone number — `1-800-213-DELL` — pinned to the top-right of every page, because in 1996 the website was a brochure that ended with a phone call. The footer is a row of four hand-drawn icon-labels (FIND / HOME / ONLINE STORE / SERVICE & SUPPORT) linked by a thin green horizontal rule, and a single classic-Mosaic-blue underlined "Copyright" link sitting above the legal small print in Times Roman.
-
-**Key Characteristics:**
-- Literal page frame: every page sits inside a `{colors.frame-ink}` (black) outer border ~8 px thick — the design treats the browser window as a printed picture frame
-- Flat color-block "ribbon cards" tint each product family with a dedicated catalog color (`{colors.tint-sage}` Latitude, `{colors.tint-salmon}` OptiPlex GX, `{colors.tint-periwinkle}` PowerEdge, `{colors.tint-sky}` Dellware, etc.) — no gradients, no shadows, no opacity
-- Chunky display typography in `{typography.display}` (Arial Black 36 / weight 900) for section title blocks; `{typography.heading-2}` (Helvetica Bold 16) for product row titles; `{typography.body}` Times Roman 14 for everything else
-- Hand-cut GIF "stickers" overlay the layout: yellow "BUY a DELL" tab in the top right, angled "NEW!" bursts on new product rows, round red PC Magazine Readers' Choice seals
-- `{colors.primary}` (Dell red) reserved for two things only: the homepage CTA panel and the top-right phone number — never decorative
-- Footer icon-nav with classic-blue (`{colors.link}` #0000ee) anchor underlines — the unmistakable Netscape 3.x link colour
-
-## Colors
-
-### Brand & Accent
-- **Dell Red** (`{colors.primary}` — #e91d2a): The brand's signature red. Reserved for the homepage CTA panel ("At Dell.com, we'll help you find the right system…"), the top-right phone number, and the PC Magazine Readers' Choice seal ring. Never used as a card body fill.
-- **Dell Yellow** (`{colors.yellow-sticker}` — #fcc20f): Sticker yellow — the "BUY a DELL" tab in the top banner, and the angled "NEW!" bursts overlapping new product rows.
-- **Dell Purple** (`{colors.purple-stripe}` — #6a26a4): The accent stripe behind the lowercase ".com" / "DELL" wordmark text — appears inside the "BUY a DELL" sticker chrome only.
-
-### Surface
-- **Frame Ink** (`{colors.frame-ink}` — #000000): Pure black. The page frame, the top banner background, button fills, and all 1 px ribbon-card hairlines.
-- **Canvas** (`{colors.canvas}` — #ffffff): True white inside the frame. The page surface, the ribbon-card title-bar fill, and the icon-label nav backdrop.
-
-### Text
-- **Ink** (`{colors.ink}` — #000000): Body text, headings, link copy before visit. Pure black; no warm-near-black softening in 1996.
-- **Link** (`{colors.link}` — #0000ee): Classic Mosaic / Netscape 3.x default link blue. Underlined inline anchors ("Copyright", "(Terms of Use)", inline "from Dell's award-winning service and support teams").
-
-### Ribbon-Card Tint Family
-Eight catalog colors, one per product line — these are the page's chromatic personality:
-- **Olive** (`{colors.tint-olive}` — #8e8a25): "DIMENSION DESKTOPS" eyebrow block
-- **Sage** (`{colors.tint-sage}` — #b3bd95): Latitude Notebooks ribbon body
-- **Salmon** (`{colors.tint-salmon}` — #d77a7a): "OPTIPLEX DESKTOP SYSTEMS" eyebrow + GX Series body
-- **Peach** (`{colors.tint-peach}` — #e6915d): Dimension card body + OptiPlex Gs body
-- **Lime** (`{colors.tint-lime}` — #c0d4a7): OptiPlex G Series body
-- **Sky** (`{colors.tint-sky}` — #9ab6c8): Dellware ribbon body
-- **Steel** (`{colors.tint-steel}` — #a5b8c0): Dimension XPS Pro ribbon body
-- **Periwinkle** (`{colors.tint-periwinkle}` — #8c9ae0): PowerEdge ribbon body
-
-The tints are saturated but not vivid — they sit just below true neutral chroma, the signature of GIF-era web-safe-palette quantization.
-
-## Typography
+# RuBrik Presentation Design System
 
-### Font Family
+## Design Direction
 
-Three system-stack families, no webfonts (webfonts didn't exist yet):
+**Theme Name:** Iron Chronicle  
+**Visual Style:** 1980s European Industrial × Medieval Foundry  
+**Primary Use:** Full-screen HTML presentation for **RuBrik — Ruang Pabrik**
 
-- **Arial Black** (fallback: Helvetica, system-ui sans) — display headings only. The chunky stenciled section eyebrows ("DIMENSION DESKTOPS", "OPTIPLEX DESKTOP SYSTEMS") are Arial Black at weight 900, set in all-caps with normal tracking.
-- **Helvetica** (fallback: Arial, system-ui sans) — product-row titles, button labels, the top banner's "BUILD YOUR OWN COMPUTER. ONLINE." headline. Always bold (700), always all-caps.
-- **Times New Roman** (fallback: Times, serif) — body copy. Every paragraph, every caption, every inline anchor sits in default-rendered Times Roman. The serifs date the design instantly — body text on the modern web is almost never serif.
+The presentation should feel like an old European steel factory control room built inside a medieval fortress.
 
-### Hierarchy
+The visual world combines:
 
-| Token | Size | Weight | Line Height | Use |
-|---|---|---|---|---|
-| `{typography.display}` | 36px | 900 | 1.0 | Section eyebrow titles ("DIMENSION DESKTOPS", "OPTIPLEX DESKTOP SYSTEMS") |
-| `{typography.heading-1}` | 24px | 900 | 1.05 | Sub-page hero headlines |
-| `{typography.heading-2}` | 16px | 700 | 1.2 | Top banner copy, product-line H1 ("Reliable PC's for High-Performance Computing.") |
-| `{typography.heading-3}` | 14px | 700 | 1.2 | Ribbon-card title bar ("OPTIPLEX GX PRO", "DIMENSION XPS") |
-| `{typography.body}` | 14px | 400 | 1.4 | Default paragraph copy, ribbon-card body, CTA-panel copy |
-| `{typography.body-sm}` | 12px | 400 | 1.4 | "This site is best viewed with browser versions 3.0 and higher." |
-| `{typography.caption}` | 11px | 400 | 1.35 | Footer copyright text |
-| `{typography.button}` | 12px | 700 | 1.0 | Button labels, "NEW!" sticker, BUY-a-DELL sticker |
-| `{typography.ui-label}` | 12px | 700 | 1.0 | Icon-label nav uppercase labels ("FIND", "HOME", "ONLINE STORE", "SERVICE & SUPPORT") |
+- 1980s industrial machinery
+- Eastern and Western European factory signage
+- Medieval ironwork
+- Brutalist architecture
+- Analog control panels
+- Old technical manuals
+- Factory archive documents
+- Heavy steel doors
+- Warning labels
+- Monospaced terminal typography
+- Worn parchment and oxidized metal textures
 
-### Principles
-- Sans for UI, serif for body — the inverse of the modern convention, and a dead giveaway of mid-90s typography.
-- Display weights are extreme (900 / Black) and never softer. The "Dimension" / "OptiPlex" eyebrow blocks lean on the heaviest weight the font ships.
-- No letter-spacing tracking adjustments — pixel-fonts in 1996 didn't reward it. Everything is set at the browser's default kern.
-- Line-height is tight on display (1.0) and conventional on body (1.4) — a holdover from print-magazine catalog layout.
+The result must look **serious, heavy, mechanical, historical, and premium**.
 
-### Note on Font Substitutes
-All three families are operating-system defaults on every consumer OS shipped in 1996 (Windows 95: Arial / Times New Roman; Mac OS 7.5+: Helvetica / Times). The brand had no fallback strategy because no fallback was needed — the fonts were always present. Modern reproductions can stay on this exact stack (Arial Black / Helvetica / Times New Roman) for authenticity.
+It must **not** feel like fantasy RPG, steampunk cosplay, cyberpunk, or a medieval castle website.
 
-## Layout
+---
 
-### Spacing System
+# 1. Core Visual Philosophy
 
-- **Base unit**: 4 px (with 2 / 6 / 10 intermediates). 1996 page layout was driven by HTML table cell padding (`cellpadding="4"` / `cellspacing="0"`) rather than a designed scale.
-- **Tokens**: `{spacing.xxs}` 2px · `{spacing.xs}` 4px · `{spacing.s}` 6px · `{spacing.sm}` 8px · `{spacing.m}` 10px · `{spacing.md}` 12px · `{spacing.lg}` 16px · `{spacing.xl}` 20px · `{spacing.xxl}` 24px · `{spacing.section-sm}` 32px · `{spacing.section}` 40px · `{spacing.section-lg}` 48px.
-- **Card interior padding**: `{spacing.md}` 12 px vertical / `{spacing.lg}` 16 px horizontal on ribbon-card bodies.
-- **Section vertical rhythm**: `{spacing.section}` 40 px between product-ribbon stacks; `{spacing.section-sm}` 32 px between the eyebrow color block and its first ribbon-card.
+## 1.1 Main Concept
 
-### Grid & Container
-- Fixed-width table layout pinned around 760 px wide — the de facto 1996 standard targeting 800×600 monitors with a small scrollbar gutter.
-- Two-column outer structure: left rail (~28 %) carries the homepage icon-link grid + CTA red panel; right column (~72 %) carries the product ribbon stack.
-- No grid system in the modern sense — every section is its own `<table>` declaration with hard-coded column widths.
+RuBrik should look like a communication machine built by factory engineers in 1986 and preserved inside an ancient European industrial fortress.
 
-### Whitespace Philosophy
-Tight by modern standards. Catalog density wins over editorial breath — every pixel inside the black frame is doing work (illustration, color block, headline, body). The compensating decompression happens *inside* each ribbon card: white title bar + tinted body block + product photo notch creates internal breathing room without enlarging the overall page.
+Imagine:
 
-### Responsive Strategy
+- A factory command center in Czechoslovakia, Germany, Poland, or Yugoslavia
+- Steel walls covered with operational diagrams
+- Thick paper reports stamped by administrators
+- Old CRT monitors displaying modern information
+- Medieval iron emblems integrated into machine panels
+- Mechanical indicator lamps
+- Industrial typography printed using old stencil machines
+- A sense of authority, durability, and permanence
 
-#### Breakpoints
-| Name | Width | Key Changes |
-|---|---|---|
-| Period default | 800 × 600 | Fixed 760 px layout, designed for the era's standard monitor |
-| Modern desktop | 1280+ px | Layout sits centered with generous side gutters — emulates "magazine spread in the middle of the screen" |
-| Tablet | 768 px | Black frame compresses to 4 px; ribbon-cards stack at full width inside |
-| Mobile | < 480 px | Black frame to 2 px; two-column structure collapses to single column; left rail icon grid stacks above the right-column product stack |
+The presentation should communicate:
 
-#### Touch Targets
-1996 had no notion of touch — the original designs assume mouse-only. Modern reproductions need to widen the icon-label nav targets to 44 × 44 px minimum at mobile (the 1996 icons sat at ~24 × 24 with 8 px label below, well under modern guidelines).
+> “This system was built to survive bad communication, organizational chaos, and several management rotations.”
 
-#### Collapsing Strategy
-- At ≤ 768 px, the homepage's left-rail icon-link grid (Online Store / Service / Why Dell? / Government / Worldwide / Order Status / Company Info / U.S. Careers) collapses from a 2 × 4 grid to a single-column stack
-- Ribbon-card right-edge product photo notch becomes a top-aligned full-width image at mobile
-- The top banner's tagline ("BUILD YOUR OWN COMPUTER. ONLINE.") shrinks one type tier; the phone number wraps below the BUY-a-DELL sticker
-- Footer icon-label nav stays 4-up at all widths — the icons are small enough to survive
+---
 
-#### Image Behavior
-Product photos are bitmap GIFs with hand-applied bevel shadows — they were authored at fixed pixel widths (typically 80–120 px wide). The right-edge notch effect was achieved by table-cell negative spacing. Modern reproductions should keep the bevel shadow effect (it's signature) but use SVG drop-shadow or CSS `filter: drop-shadow(2px 2px 0 #000)` to recreate it crisply at high-DPI.
+## 1.2 Design Personality
 
-## Elevation & Depth
+The design personality must be:
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 — Flush | No shadow, no border | Body text, copyright row, footer band background |
-| 1 — Hairline | `1px solid {colors.frame-ink}` | Ribbon-card outer edge, table-cell dividers |
-| 2 — Frame | `8px solid {colors.frame-ink}` | The page-frame border around the entire viewport |
-| 3 — Bevel | Hard-edge 1 px highlight + 1 px shadow on GIF stickers and product photos | "BUY a DELL" yellow sticker, NEW! bursts, award seals, product photographs |
+- Heavy
+- Disciplined
+- Mechanical
+- Authoritative
+- Functional
+- Historical
+- Slightly mysterious
+- Dryly humorous
+- Premium but not luxurious
+- Rugged but still readable
 
-There are **no soft shadows** in the 1996 design — every depth cue is either a hard 1 px border or a hand-painted bevel inside a GIF. Modern reproductions that need to feel period-accurate must resist the urge to add Material-style elevation or atmospheric drop shadows.
+Avoid anything cute, glossy, playful, futuristic, or overly polished.
 
-### Decorative Depth
-Bevels and frames carry the entire depth vocabulary:
-- The **page frame** is the strongest depth cue — it tells the viewer "this is a contained document, not a continuous canvas."
-- **Bevels on stickers** (BUY a DELL, NEW!, PC Magazine Readers' Choice) push them forward off the page surface as if pinned on with thumbtacks.
-- **Product photographs** carry their own hand-painted bevel + drop-shadow, baked into the GIF itself.
+---
 
-## Shapes
+## 1.3 Emotional Target
 
-### Border Radius Scale
+The audience should feel:
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Universal default — buttons, cards, inputs, banners, page frame, ribbon-card bodies, eyebrow blocks |
-| `{rounded.full}` | 9999px | Circular award seals (PC Magazine Readers' Choice), the round "h" sticker on the HOME icon |
+1. This is not another generic corporate portal.
+2. RuBrik has a strong and memorable identity.
+3. The platform feels structured and reliable.
+4. The old-industrial visual language makes modern digital communication feel tangible.
+5. Every slide feels like part of one large machine.
 
-The 1996 design has effectively **two** radius modes: square (everything) and round (decorative seal stickers). No 4 / 8 / 12 px subtle radius tier — that vocabulary belongs to the post-Bootstrap web.
+---
 
-### Photography Geometry
-Product photos are rectangular GIFs with their own internal beveled "monitor" framing — they sit at native pixel dimensions, never scaled. Aspect ratios cluster around 4:3 (the era's standard CRT shape). Avatars don't exist on this site — staff photography was reserved for "About Dell" pages not captured in these snapshots.
+# 2. Historical and Visual References
 
-## Components
+Use the following references as inspiration:
 
-> **No hover states documented.** Per the global no-hover policy, every component below documents Default state only.
+- European industrial facilities from the late 1970s and 1980s
+- Old steel mills and power plants
+- Soviet and Eastern European control rooms
+- German technical documentation
+- British factory warning systems
+- Medieval blacksmith workshops
+- Fortress gates and iron hinges
+- Old government archive folders
+- Military field manuals
+- Analog measurement instruments
+- Industrial safety labels
+- Vintage railway signage
+- Steel plates with engraved serial numbers
 
-### Frame & Banner
+Do not directly copy logos, national symbols, military insignia, or copyrighted visual identities.
 
-**`page-frame`** — the literal black border around the entire viewport.
-- Background `{colors.frame-ink}`, padding `{spacing.sm}` 8 px on every side, no radius.
-- The page sits *inside* this border. Treat it as a non-negotiable container chrome; collapsing it on mobile is acceptable (to ~4 px), but removing it entirely loses the brand.
+---
 
-**`top-banner`** — pure-black strip running across the top with white "BUILD YOUR OWN COMPUTER. ONLINE." headline + sub-tagline, the yellow "BUY a DELL" sticker pinned at right, and the red "1-800-213-DELL" phone number.
-- Background `{colors.frame-ink}`, text `{colors.canvas}`, type `{typography.heading-2}`, padding 12 px vertical / 16 px horizontal, no radius.
+# 3. Anti-References
 
-### Section Eyebrow Blocks
+The presentation must not look like:
 
-**`section-eyebrow-olive`** — large tinted color block holding the chunky stenciled section title ("DIMENSION DESKTOPS"). Used at the top of the Dimension product page.
-- Background `{colors.tint-olive}`, text `{colors.ink}`, type `{typography.display}` (Arial Black 36 / 900), padding 24 × 16, no radius.
+- A fantasy RPG user interface
+- A medieval game menu
+- A pirate map
+- A steampunk convention poster
+- A cyberpunk dashboard
+- A neon sci-fi spaceship
+- A glossy SaaS landing page
+- A generic modern corporate template
+- A luxury gold-and-black presentation
+- A grunge rock concert poster
+- A horror game interface
+- A Soviet propaganda poster
 
-**`section-eyebrow-salmon`** — same chrome with the OptiPlex line's salmon-pink fill ("OPTIPLEX DESKTOP SYSTEMS").
-- Background `{colors.tint-salmon}`, otherwise identical to the olive variant.
+Avoid excessive gears, decorative pipes, skulls, swords, dragons, crowns, chains, or fantasy ornaments.
 
-### Ribbon Cards
+Medieval references must appear through **materials, construction, framing, and iron craftsmanship**, not literal fantasy symbols.
 
-The brand's signature component. Each product-row "card" is a stack of three pieces:
-1. **`ribbon-card-title`** — white horizontal title bar with the product variant name in Helvetica Bold all-caps (e.g. "OPTIPLEX GX PRO", "DIMENSION XPS", "POWEREDGE SERVERS"). 1 px bottom border in `{colors.frame-ink}`.
-   - Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.heading-3}`, padding 6 × 12, no radius.
-2. **`ribbon-card-body-<tint>`** — color-block body in one of eight tints, holding the short marketing pitch in `{typography.body}` (Times Roman 14). Padding 12 × 16. The product photograph notches into the right edge with a transparent GIF cutout.
-3. **Photo notch** — the GIF sits in the rightmost ~25 % of the row, hanging slightly above and below the body bar like a card pinned to a corkboard.
+---
 
-Each tint variant is its own component entry. Pick the one that matches the product family:
+# 4. Color System
 
-- **`ribbon-card-body-sage`** — `{colors.tint-sage}` fill, used for Latitude Notebooks rows
-- **`ribbon-card-body-salmon`** — `{colors.tint-salmon}` fill, used for OptiPlex GX Series rows
-- **`ribbon-card-body-peach`** — `{colors.tint-peach}` fill, used for Dimension rows and OptiPlex Gs
-- **`ribbon-card-body-lime`** — `{colors.tint-lime}` fill, used for OptiPlex G Series rows
-- **`ribbon-card-body-sky`** — `{colors.tint-sky}` fill, used for Dellware rows
-- **`ribbon-card-body-steel`** — `{colors.tint-steel}` fill, used for Dimension XPS Pro rows
-- **`ribbon-card-body-periwinkle`** — `{colors.tint-periwinkle}` fill, used for PowerEdge Server rows
+## 4.1 Primary Palette
 
-All seven share identical chrome: 1 px solid `{colors.frame-ink}` border, `{spacing.md}` × `{spacing.lg}` (12 × 16) padding, `{rounded.none}` (sharp corners), `{typography.body}` Times Roman 14 inside. Only the fill color changes per product family.
+| Token | Color | Hex | Usage |
+|---|---|---:|---|
+| `--iron-black` | Iron Black | `#111311` | Main background |
+| `--forge-charcoal` | Forge Charcoal | `#1B1E1B` | Panels and cards |
+| `--steel-grey` | Steel Grey | `#343936` | Borders and secondary surfaces |
+| `--aged-iron` | Aged Iron | `#505650` | Muted controls and dividers |
+| `--bone-paper` | Bone Paper | `#D6D0BC` | Main text |
+| `--dust-paper` | Dust Paper | `#AAA58F` | Secondary text |
+| `--warning-amber` | Warning Amber | `#D99A2B` | Main accent |
+| `--oxidized-red` | Oxidized Red | `#8B3429` | Warnings and critical states |
+| `--machine-green` | Machine Green | `#73856A` | Active or confirmed states |
+| `--cold-steel` | Cold Steel | `#879294` | Technical details |
+| `--parchment` | Parchment | `#C2B68E` | Document cards |
+| `--oil-shadow` | Oil Shadow | `#080A08` | Deep shadow |
 
-### Call-to-Action
+---
 
-**`cta-block-red`** — the homepage's vivid Dell-red panel ("At Dell.com, we'll help you find the right system, configure it, price it, and order it…").
-- Background `{colors.primary}`, text `{colors.on-primary}` (white), 1 px solid frame-ink border, type `{typography.body}` (Times Roman 14), padding 16 px, no radius.
-- One per page maximum. The brand's most aggressive attention-grab — never use it for anything except a top-tier sales message.
+## 4.2 Accent Rules
 
-**`phone-callout`** — top-right phone number ("1-800-213-DELL") rendered as red on the black banner.
-- Background `{colors.frame-ink}`, text `{colors.primary}`, type `{typography.heading-2}` Helvetica Bold 16, padding 4 × 8, no radius. Pinned to the right of the top banner on every page.
+Use `warning-amber` as the dominant accent.
 
-### Stickers (GIF-style overlays)
+Use amber for:
 
-**`buy-a-dell-sticker`** — yellow rectangular sticker with "BUY a DELL" in Helvetica Bold, the "a" set in a small purple stripe, the "DELL" wordmark in black. Pinned to the top-right of every page.
-- Background `{colors.yellow-sticker}`, text `{colors.ink}`, 1 px black border, type `{typography.button}`, padding 4 × 8, no radius.
+- Active slide indicator
+- Important numbers
+- Highlighted labels
+- Flow arrows
+- Interactive controls
+- Key feature icons
+- Selected navigation
+- Progress bars
 
-**`new-burst-sticker`** — angled yellow burst with "NEW!" in Helvetica Bold black, overlapping the right side of new product ribbon-cards. Slight rotation (~15°) gives it the pinned-on-with-tape feel.
-- Background `{colors.yellow-sticker}`, text `{colors.ink}`, type `{typography.button}`, padding 4 × 8, no radius (rotation applied separately).
+Use oxidized red only for:
 
-**`cert-seal`** — round red award seal: center reads "PC MAGAZINE", ringed by "SERVICE · RELIABILITY · READERS' CHOICE", with an inner white field and red bordered ring. Sits on the right rail of product pages.
-- Background `{colors.primary}`, text `{colors.canvas}`, type `{typography.button}`, rounded `{rounded.full}`, 64 px size.
+- Problems
+- Rejected states
+- Warning labels
+- Critical notes
+- Before-state metrics
 
-### Navigation
+Use machine green only for:
 
-**`icon-label-nav`** — bottom-of-page navigation row: four hand-drawn icons (eyeglasses-FIND / house-HOME / yellow-sticker-ONLINE STORE / wrench-SERVICE & SUPPORT) connected by a thin green horizontal rule, each with an uppercase Helvetica label beneath.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.ui-label}`, padding 8 px around each icon-label pair, no radius.
-- The connecting green rule is part of the GIF imagery, not a CSS border.
+- Published
+- Approved
+- Active
+- Connected
+- Completed states
 
-### Inputs & Buttons
+Never use more than two accent colors prominently on one slide.
 
-**`text-input`** — bordered HTML input. White fill, 1 px solid black border, Times Roman 14 inside.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid frame-ink, type `{typography.body}`, padding 4 × 6, no radius.
-- Used on the Search and "Configure & Buy" forms (not visible in these three captures but consistent with the era's HTML 3.2 form widgets).
+---
 
-**`button-primary`** — black filled button with white Helvetica Bold uppercase label.
-- Background `{colors.frame-ink}`, text `{colors.on-primary}`, 1 px solid frame-ink, type `{typography.button}`, padding 6 × 16, no radius.
+## 4.3 Color Ratio
 
-**`button-secondary`** — white filled outlined button. Same chrome with inverted colours.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid frame-ink, type `{typography.button}`, padding 6 × 16, no radius.
+Recommended visual ratio:
 
-**`button-text-link`** — bare underlined anchor in classic-Mosaic blue.
-- Text `{colors.link}` #0000ee, type `{typography.link}` Times Roman 14, underline on default. No padding, no radius.
+- 65% Iron Black and Forge Charcoal
+- 20% Bone Paper and Steel Grey
+- 10% Warning Amber
+- 5% Red, Green, or other status colors
 
-### Footer
+The deck must remain dark and controlled.
 
-**`footer-band`** — the bottom of every page: icon-label nav row, classic-blue Copyright link, "(Terms of Use)" parenthetical, browser-compatibility small print, and the Microsoft BackOffice / Internet Explorer logo banners.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px top border in frame-ink, type `{typography.body-sm}`, padding 16 px.
+---
 
-### Examples (illustrative)
+# 5. Materials and Surface Language
 
-> Auto-derived kit-mirror demonstration surfaces (`scripts/derive-examples-block.mjs`). Each `ex-*` entry references brand-native primitives so downstream consumers (`/preview-design`, `/generate-kit`) re-skin the same 10 surfaces consistently. `TO_FILL` markers indicate missing primitives — resolve in the LLM judgment pass.
+## 5.1 Main Materials
 
-**`ex-pricing-tier`** — Default Pricing tier card. Re-uses feature-card chrome with the base white surface.
-- Properties: `backgroundColor`, `textColor`, `borderColor`, `rounded`, `padding`
+Use subtle visual representations of:
 
-**`ex-pricing-tier-featured`** — Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode).
-- Properties: `backgroundColor`, `textColor`, `rounded`, `padding`
+- Blackened iron
+- Brushed steel
+- Oxidized metal
+- Cast iron
+- Old machinery paint
+- Thick archival paper
+- Worn cardboard labels
+- Concrete
+- Leather binding
+- Riveted steel plates
 
-**`ex-product-selector`** — What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery).
-- Properties: `backgroundColor`, `rounded`, `padding`
+Textures must remain subtle.
 
-**`ex-cart-drawer`** — Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart).
-- Properties: `backgroundColor`, `rounded`, `padding`, `item-divider`
+The audience must notice the atmosphere without losing readability.
 
-**`ex-app-shell-row`** — Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator.
-- Properties: `backgroundColor`, `activeIndicator`, `rounded`, `padding`
+---
 
-**`ex-data-table-cell`** — Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm.
-- Properties: `headerBackground`, `headerTypography`, `bodyTypography`, `cellPadding`, `rowBorder`
+## 5.2 Surface Rules
 
-**`ex-auth-form-card`** — Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside.
-- Properties: `backgroundColor`, `rounded`, `padding`
+Panels should feel like physical machine components.
 
-**`ex-modal-card`** — Modal dialog surface — same chrome as feature-card with elevated shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`
+Recommended properties:
 
-**`ex-empty-state-card`** — Empty-state illustration frame.
-- Properties: `backgroundColor`, `rounded`, `padding`, `captionTypography`
+- Thick borders
+- Slight inner shadow
+- Small rivets
+- Engraved labels
+- Serial numbers
+- Uneven but controlled texture
+- Mechanical spacing
+- Sharp or minimally rounded corners
 
-**`ex-toast`** — Toast notification surface — feature-card shape + medium shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`, `typography`
+Avoid:
 
+- Floating glass cards
+- Transparent blur panels
+- Large soft gradients
+- Excessively smooth surfaces
+- Plastic-looking UI components
+- Large border radiuses
 
-## Do's and Don'ts
+---
 
-### Do
-- Keep the literal `{components.page-frame}` black border on every page — this is the brand's single most identifiable container chrome.
-- Reserve `{colors.primary}` (Dell red) for the `{components.cta-block-red}` panel and the `{components.phone-callout}` only. Every other use dilutes the urgency signal.
-- Use the eight ribbon-card tint colors (`{colors.tint-olive}` / sage / salmon / peach / lime / sky / steel / periwinkle) as a *family* — pick one per product line and stay with it across the line's marketing surfaces.
-- Set every display headline in `{typography.display}` (Arial Black 36 / weight 900). The brand's typographic register depends on extreme weight against flat color.
-- Keep body copy in `{typography.body}` Times Roman 14 — substituting a modern sans loses the catalog feel entirely.
-- Render every CTA / button at `{rounded.none}` (0 px). Modern soft-radius buttons betray the era.
-- Use hand-painted bevels / hard-edge GIF shadows on stickers and product photos. Never substitute a soft CSS shadow.
+## 5.3 Border Radius
 
-### Don't
-- Don't introduce a chromatic accent outside the eight catalog tints + Dell red + Dell yellow + classic link blue. The palette is closed by design.
-- Don't soften any corner. `{rounded.none}` is the universal modifier; only award seals get `{rounded.full}`.
-- Don't replace Times Roman body with Arial / Helvetica / Inter / a webfont — the serif body is the era's signature.
-- Don't add soft drop-shadows or atmospheric gradients. The brand has hard borders and flat fills; everything else reads as anachronism.
-- Don't crop or "tuck" product photos with `border-radius` or `clip-path`. The notch into the ribbon-card right edge is the framing — the photo itself stays a hard rectangle.
-- Don't pair two `{components.cta-block-red}` panels on the same page. The red fill is meant to be the singular attention pole.
-- Don't strip the `{components.phone-callout}` from the top banner. In 1996 the website existed to drive phone-call orders; the phone number IS the navigation.
+Use a restrained radius system:
+
+```css
+--radius-xs: 2px;
+--radius-sm: 4px;
+--radius-md: 6px;
+--radius-panel: 8px;
+```
+
+Most components should use `2px` to `6px`.
+
+Large cards may use `8px`.
+
+Never use pill-shaped cards except for small status indicators.
+
+---
+
+# 6. Typography
+
+## 6.1 Typography Concept
+
+Typography should combine:
+
+- Heavy industrial headlines
+- European editorial serif details
+- Technical monospaced labels
+- Highly readable body text
+
+The deck should feel like a mix of:
+
+- Factory signage
+- Government technical documents
+- Medieval archive labels
+- 1980s engineering manuals
+
+---
+
+## 6.2 Font Stack
+
+Recommended fonts:
+
+### Display Headline
+
+Use one:
+
+- `Archivo Black`
+- `Oswald`
+- `Roboto Condensed`
+- `Barlow Condensed`
+- `League Gothic`
+
+Recommended:
+
+```css
+font-family: "Archivo Black", "Arial Black", sans-serif;
+```
+
+### Editorial or Historical Accent
+
+Use one:
+
+- `Cormorant Garamond`
+- `Libre Baskerville`
+- `EB Garamond`
+
+Recommended:
+
+```css
+font-family: "Cormorant Garamond", Georgia, serif;
+```
+
+Use only for:
+
+- Section numbers
+- Quotes
+- Historical labels
+- Opening slide subtitle
+- Decorative captions
+
+### Body
+
+Use:
+
+- `Inter`
+- `IBM Plex Sans`
+- `Source Sans 3`
+
+Recommended:
+
+```css
+font-family: "IBM Plex Sans", Arial, sans-serif;
+```
+
+### Technical and Machine Labels
+
+Use:
+
+- `IBM Plex Mono`
+- `JetBrains Mono`
+- `Space Mono`
+
+Recommended:
+
+```css
+font-family: "IBM Plex Mono", monospace;
+```
+
+---
+
+## 6.3 Type Scale
+
+For a 1920×1080 viewport:
+
+```css
+--text-xs: 14px;
+--text-sm: 18px;
+--text-md: 22px;
+--text-lg: 28px;
+--text-xl: 38px;
+--text-2xl: 56px;
+--text-3xl: 78px;
+--text-hero: clamp(80px, 9vw, 160px);
+```
+
+Slide titles must be large and visually dominant.
+
+Body content must remain readable from a projector.
+
+Never place body text below `18px` on desktop.
+
+---
+
+## 6.4 Typography Rules
+
+- Use uppercase for industrial labels and section markers.
+- Use sentence case for explanatory copy.
+- Use monospaced text for technical annotations, status, dates, and numbers.
+- Use serif accents sparingly.
+- Use wide tracking for navigation labels.
+- Avoid center-aligning long text.
+- Do not use more than three font styles on one slide.
+
+Recommended label style:
+
+```css
+.machine-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+```
+
+---
+
+# 7. Layout System
+
+## 7.1 Slide Canvas
+
+Primary presentation ratio:
+
+```text
+16:9
+1920 × 1080
+```
+
+Each slide must fill one viewport.
+
+Recommended safe area:
+
+```css
+padding: clamp(48px, 5vw, 96px);
+```
+
+Do not place essential content near browser edges.
+
+---
+
+## 7.2 Grid
+
+Use a 12-column grid.
+
+Recommended structure:
+
+```css
+display: grid;
+grid-template-columns: repeat(12, minmax(0, 1fr));
+gap: 24px;
+```
+
+Use strict alignment.
+
+The visual style should feel engineered, not casually arranged.
+
+---
+
+## 7.3 Layout Patterns
+
+Preferred slide layouts:
+
+1. **Monumental Title**
+   - Large title
+   - Small technical metadata
+   - One strong visual object
+
+2. **Split Command Panel**
+   - Left: narrative or problem
+   - Right: diagram, metric, or mockup
+
+3. **Mechanical Grid**
+   - 4–6 structured modules
+   - Equal spacing
+   - Numbered or labeled
+
+4. **Archive Document**
+   - One large paper-like panel
+   - Stamps, labels, signatures, and notes
+
+5. **Control Room**
+   - Multiple metrics and indicators
+   - Strong center focal point
+
+6. **Industrial Blueprint**
+   - Architecture diagram
+   - Thin connecting lines
+   - Technical annotations
+
+7. **Steel Gate Closing**
+   - Final slide
+   - Large central message
+   - Heavy visual composition
+
+Avoid placing too many different layout systems in one slide.
+
+---
+
+# 8. Decorative Language
+
+## 8.1 Rivets
+
+Rivets may appear on:
+
+- Large panels
+- Navigation rails
+- Section title plates
+- Architecture blocks
+- Closing slide frames
+
+Rules:
+
+- Maximum four visible rivets per component
+- Use tiny circles or embossed points
+- Keep contrast low
+- Do not decorate every card
+
+---
+
+## 8.2 Engraved Plates
+
+Use small metal plates for:
+
+- Slide numbers
+- Section names
+- Status
+- Dates
+- Technical labels
+- Module IDs
+
+Example:
+
+```text
+MODULE 04
+FACTORY WIRE
+STATUS: ACTIVE
+```
+
+---
+
+## 8.3 Stamps
+
+Use document stamps for:
+
+- APPROVED
+- PUBLISHED
+- VERIFIED
+- INTERNAL USE
+- ADMIN REVIEW
+- NO ADDITIONAL LICENSE
+
+Stamps must look worn and slightly misaligned.
+
+Do not use stamps on every slide.
+
+---
+
+## 8.4 Archive Codes
+
+Add subtle fictional codes such as:
+
+```text
+RBK-COMM-1986
+UNIT 04
+DOC 06-A
+REV 1.0
+INTERNAL TRANSMISSION
+```
+
+These codes are decorative and must not imply real compliance certification.
+
+---
+
+## 8.5 Industrial Icons
+
+Use:
+
+- Megaphone
+- Newspaper
+- Speech bubble
+- Storefront
+- Calendar
+- Radio signal
+- Database
+- Wrench
+- Shield
+- File archive
+- Gauge
+- Terminal
+- Factory
+- Mail
+- Clock
+
+Icons should be:
+
+- Outline or engraved style
+- Thick enough for projector visibility
+- Mostly monochrome
+- Amber when active
+
+Avoid colorful app-style icons.
+
+---
+
+# 9. Component Design
+
+## 9.1 Feature Card
+
+Feature cards must look like removable machine modules.
+
+Properties:
+
+```css
+background: #1B1E1B;
+border: 1px solid #505650;
+box-shadow:
+  inset 0 0 0 1px rgba(255,255,255,0.025),
+  0 12px 30px rgba(0,0,0,0.35);
+border-radius: 4px;
+```
+
+Each card may include:
+
+- Module number
+- Icon
+- Feature name
+- One-line description
+- Status light
+- Small serial code
+
+Hover behavior:
+
+- Border becomes amber
+- Status light activates
+- Panel moves upward by a maximum of 4px
+- No dramatic scaling
+
+---
+
+## 9.2 Metric Card
+
+Metric cards should look like analog counter modules.
+
+Example:
+
+```text
+TIME SAVED
+13 HRS / MONTH
+```
+
+Visual rules:
+
+- Large monospaced number
+- Small uppercase label
+- Amber numeric emphasis
+- Thin etched divider
+- Optional small gauge line
+
+Do not use glossy dashboard cards.
+
+---
+
+## 9.3 Status Badge
+
+Recommended styles:
+
+```text
+ACTIVE
+PUBLISHED
+PENDING
+REJECTED
+AUTOMATED
+INTERNAL
+```
+
+Shape:
+
+- Small rectangle
+- Minimal corner radius
+- Uppercase
+- Monospaced
+- 1px border
+- No bubble-like pills
+
+---
+
+## 9.4 Buttons
+
+Buttons should look like industrial switches or stamped action plates.
+
+Primary button:
+
+```css
+background: #D99A2B;
+color: #111311;
+border: 1px solid #F1BC58;
+box-shadow:
+  inset 0 -3px 0 rgba(0,0,0,0.25),
+  0 6px 18px rgba(0,0,0,0.4);
+```
+
+Label examples:
+
+- ENTER RUBRIK
+- OPEN MODULE
+- NEXT SECTION
+- VIEW SYSTEM
+- ACTIVATE
+
+Hover behavior:
+
+- Slight brightness increase
+- Move upward by 1px
+- Stronger border
+- Optional mechanical click sound only when explicitly enabled
+
+Never auto-play audio.
+
+---
+
+## 9.5 Progress Indicator
+
+Create a vertical or horizontal progress rail resembling a machine track.
+
+Recommended:
+
+```text
+01 ●────02────03────04────05────06
+```
+
+The active slide should use amber.
+
+Inactive slides use aged iron.
+
+The progress indicator must remain subtle.
+
+---
+
+## 9.6 Navigation Controls
+
+Navigation controls should resemble physical machine buttons.
+
+Use:
+
+- Previous
+- Next
+- Overview
+- Fullscreen
+
+Style:
+
+- Square buttons
+- Thick borders
+- Monospaced labels or icons
+- Amber focus state
+- Visible keyboard focus
+
+---
+
+# 10. Slide-Specific Visual Direction
+
+## Slide 1 — Opening
+
+Visual concept:
+
+A giant steel title plate mounted on a dark factory wall.
+
+Elements:
+
+- Large `RuBrik`
+- Serif subtitle `Ruang Pabrik`
+- Amber warning light
+- Faint moving factory grid
+- Serial code
+- Small system status
+- Slowly moving mechanical ticker
+
+Suggested micro-copy:
+
+> Internal communication infrastructure, forged from tools we already own.
+
+Animation:
+
+- Title reveals like a heavy steel door opening
+- Amber lights power on sequentially
+- Background machinery moves very slowly
+
+---
+
+## Slide 2 — Problem
+
+Visual concept:
+
+An investigation wall made of pinned emails, screenshots, paper notices, and chat fragments.
+
+Use red thread-like connectors very sparingly.
+
+The composition should feel like:
+
+> “Nobody knows where the latest information actually lives.”
+
+Add stamped text:
+
+```text
+INFORMATION LOCATION: UNKNOWN
+```
+
+---
+
+## Slide 3 — Solution
+
+Visual concept:
+
+A central machine named `RuBrik`.
+
+Six information pipes feed into one reinforced control unit.
+
+Output labels:
+
+- Clear information
+- Shared context
+- Employee participation
+- Single source of truth
+
+Use industrial flow arrows.
+
+---
+
+## Slide 4 — Six Features
+
+Use a mechanical module rack.
+
+Each feature is one removable module.
+
+Layout:
+
+```text
+[01] ANNOUNCEMENT   [02] DAILY NEWS   [03] WARKOP
+[04] MARKETPLACE    [05] AGENDA       [06] FACTORY WIRE
+```
+
+Hovering a module should activate its indicator lamp.
+
+---
+
+## Slide 5 — Announcement Flow
+
+Use a conveyor-belt visual.
+
+Stages:
+
+```text
+EMAIL → PARSE → DRAFT → REVIEW → PUBLISH
+```
+
+Each stage looks like an industrial checkpoint.
+
+Published content exits as a clean announcement card.
+
+---
+
+## Slide 6 — Daily News
+
+Use an old newsroom-machine concept.
+
+RSS sources enter through multiple narrow channels.
+
+Articles pass through:
+
+- Topic filter
+- Deduplication
+- Article limit
+- Publishing queue
+
+The result appears on a vintage newspaper panel.
+
+---
+
+## Slide 7 — Warkop
+
+Use a medieval guild notice-board mixed with a factory intercom system.
+
+Messages are attached like stamped paper notes.
+
+Anonymous aliases appear as worker call signs.
+
+Use caution tape only in moderation areas.
+
+---
+
+## Slide 8 — Marketplace
+
+Use an internal factory canteen market-board.
+
+Product cards resemble inventory tags.
+
+Contact buttons resemble order request buttons.
+
+Avoid cheerful marketplace colors.
+
+The mood must remain industrial and internal.
+
+---
+
+## Slide 9 — Agenda
+
+Use a mechanical time-board inspired by old railway station schedules.
+
+Meeting events may flip or slide into place.
+
+Display:
+
+- Date
+- Time
+- Location
+- Status
+
+Do not overuse flip-clock animation.
+
+---
+
+## Slide 10 — Architecture
+
+Use an industrial blueprint on dark paper.
+
+Three layers:
+
+- Presentation
+- Logic
+- Data and Integration
+
+Nodes must resemble steel equipment plates.
+
+Connections resemble technical wiring.
+
+Use small codes and labels around the diagram.
+
+---
+
+## Slide 11 — Two Access Paths
+
+Use two heavy steel doors:
+
+- EMPLOYEE LANDING
+- ADMIN CMS
+
+Both connect to one central reinforced vault:
+
+- SHARED SPREADSHEET
+
+The concept must clearly communicate:
+
+> Two controlled entrances. One data source.
+
+---
+
+## Slide 12 — CMS
+
+Use a factory command center interface.
+
+Dashboard modules resemble analog control instruments.
+
+Pending items use amber.
+
+Published items use green.
+
+Rejected or failed items use oxidized red.
+
+Avoid turning the slide into a tiny unreadable screenshot.
+
+---
+
+## Slide 13 — Google Sheets Backbone
+
+Use a mechanical filing system.
+
+Ten sheets become ten labeled archive drawers.
+
+Each drawer has:
+
+- Sheet name
+- Function
+- Module code
+
+Connections between drawers may appear as steel rails or document routing lines.
+
+---
+
+## Slide 14 — Google Workspace Engine
+
+Place RuBrik in the center as a foundry furnace.
+
+Around it:
+
+- Apps Script
+- Sheets
+- Sites
+- Drive
+- Gmail
+- Calendar
+
+Each tool acts like a machine component powering the system.
+
+The `Rp 0` platform cost should appear as a large stamped plate.
+
+Include a smaller note:
+
+> Existing licenses are reused; implementation and maintenance still require human effort.
+
+---
+
+## Slide 15 — Value
+
+Use a before-and-after production line.
+
+Before:
+
+- Scattered
+- Manual
+- Slow
+- Repetitive
+
+After:
+
+- Centralized
+- Assisted
+- Faster
+- Traceable
+
+Metrics should resemble analog counters.
+
+Do not use colorful SaaS charts.
+
+---
+
+## Slide 16 — Closing
+
+Visual concept:
+
+A giant fortress-like steel gate with the RuBrik emblem.
+
+Main line:
+
+> RuBrik siap berjalan. Kapan kita mulai?
+
+Button:
+
+```text
+ENTER RUBRIK
+```
+
+Animation:
+
+- Gate unlocks slowly
+- Internal amber light turns on
+- The final button receives a subtle pulse
+
+The final slide must feel like activating a machine, not buying a software subscription.
+
+---
+
+# 11. Background System
+
+## 11.1 Base Background
+
+Recommended:
+
+```css
+background:
+  radial-gradient(
+    circle at 70% 20%,
+    rgba(217, 154, 43, 0.06),
+    transparent 30%
+  ),
+  linear-gradient(
+    rgba(255,255,255,0.018) 1px,
+    transparent 1px
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255,255,255,0.014) 1px,
+    transparent 1px
+  ),
+  #111311;
+background-size:
+  auto,
+  48px 48px,
+  48px 48px,
+  auto;
+```
+
+---
+
+## 11.2 Texture Overlay
+
+Add a subtle noise layer.
+
+Maximum opacity:
+
+```css
+opacity: 0.035;
+```
+
+The noise must not reduce text clarity.
+
+---
+
+## 11.3 Light System
+
+Use amber lights as visual indicators.
+
+Lighting should feel:
+
+- Low-key
+- Directional
+- Slightly dusty
+- Mechanical
+- Warm against cold metal
+
+Avoid broad neon glows.
+
+---
+
+# 12. Illustration and Image Treatment
+
+If photos or illustrations are used:
+
+- Convert them to desaturated or low-saturation treatment
+- Add warm amber or cold steel tint
+- Use strong contrast
+- Crop tightly
+- Place inside steel frames
+- Add archival captions
+- Use image grain sparingly
+
+Preferred image subjects:
+
+- Factory interiors
+- Steel furnaces
+- Control rooms
+- Old industrial machinery
+- Technical drawings
+- Heavy doors
+- Archive shelves
+- Worker tools
+- Mechanical switches
+
+Avoid generic smiling office stock photos.
+
+---
+
+# 13. Animation System
+
+## 13.1 Animation Personality
+
+Animations must feel:
+
+- Mechanical
+- Deliberate
+- Heavy
+- Precise
+- Slightly imperfect
+- Never floaty or playful
+
+---
+
+## 13.2 Allowed Animations
+
+- Steel panel slide
+- Mechanical shutter reveal
+- Lamp activation
+- Gauge movement
+- Stamp impact
+- Document feed
+- Conveyor motion
+- Wire connection drawing
+- Counter rotation
+- Very subtle dust movement
+- Slow parallax between metal layers
+
+---
+
+## 13.3 Timing
+
+Recommended durations:
+
+```css
+--motion-fast: 160ms;
+--motion-medium: 320ms;
+--motion-slow: 650ms;
+--motion-cinematic: 1100ms;
+```
+
+Use `ease-out` for panels.
+
+Use a slightly heavier easing for doors:
+
+```css
+cubic-bezier(0.22, 1, 0.36, 1)
+```
+
+---
+
+## 13.4 Motion Rules
+
+- Animate only meaningful elements
+- Limit entrance animation to 3–5 groups per slide
+- Avoid continuous bouncing
+- Avoid large zoom transitions
+- Avoid spinning gears
+- Avoid excessive parallax
+- Respect `prefers-reduced-motion`
+
+---
+
+# 14. Diagram Style
+
+Diagrams must look like engineering plans.
+
+Use:
+
+- Straight lines
+- Right-angle connectors
+- Small arrowheads
+- Labels above connections
+- Numbered nodes
+- Monospaced annotations
+- Amber active paths
+- Grey inactive paths
+
+Avoid:
+
+- Rounded bubble diagrams
+- Rainbow connectors
+- Soft floating nodes
+- Cartoon arrows
+
+Recommended node format:
+
+```text
+┌───────────────────────────┐
+│ UNIT 03                   │
+│ GOOGLE SPREADSHEET        │
+│ STATUS: CONNECTED         │
+└───────────────────────────┘
+```
+
+---
+
+# 15. Chart Style
+
+Charts must resemble control-room instrumentation.
+
+Use:
+
+- Thick baseline
+- Limited labels
+- Large numbers
+- Amber primary data
+- Grey comparison data
+- Red only for problem state
+- Grid lines with low opacity
+- Monospaced values
+
+Preferred chart types:
+
+- Before versus after bars
+- Counter cards
+- Horizontal comparison bars
+- Timeline rails
+- Gauge-like progress
+- Step process diagrams
+
+Avoid:
+
+- Pie charts with many colors
+- 3D charts
+- Donut charts with decorative gradients
+- Tiny legends
+- Overloaded dashboards
+
+---
+
+# 16. Copy Style
+
+The writing tone should be:
+
+- Direct
+- Dry
+- Slightly sarcastic
+- Professional
+- Easy to understand
+- Not overly technical
+- Not too formal
+
+Examples:
+
+- “Informasinya ada. Lokasinya menjadi misteri organisasi.”
+- “Katanya sudah pernah di-share.”
+- “One platform. One source of truth. Less archaeology.”
+- “Anonymous discussion, moderated chaos.”
+- “Your meetings. Unfortunately, still your meetings.”
+- “Built from tools we already own.”
+- “Admin mengelola konten, bukan rasa takut merusak formula.”
+- “The system is modern. The visual identity survived three industrial revolutions.”
+
+Avoid:
+
+- Excessive slang
+- Insults
+- Department-specific jokes
+- Political references
+- Military language
+- Overly dramatic medieval phrases
+- Fantasy vocabulary such as kingdom, dragon, warrior, battle, or throne
+
+---
+
+# 17. Accessibility
+
+The industrial aesthetic must never damage usability.
+
+Requirements:
+
+- Minimum text contrast ratio of 4.5:1
+- Visible keyboard focus
+- Minimum body size of 18px on desktop
+- No text placed directly over complex images
+- Status must not rely only on color
+- All interactive elements require accessible labels
+- Reduced-motion mode
+- Clear slide navigation
+- Avoid flickering lights
+- No rapid CRT effects
+- No audio by default
+
+---
+
+# 18. Responsive Behavior
+
+## Desktop and Projector
+
+- Maintain 16:9 composition
+- Use large titles
+- Preserve multi-column layouts
+- Keep decoration visible but secondary
+
+## Tablet
+
+- Reduce side metadata
+- Simplify diagrams
+- Preserve the main narrative
+- Move navigation closer to screen edges
+
+## Mobile
+
+- Stack columns vertically
+- Hide non-essential decoration
+- Keep one major visual per screen
+- Preserve slide-by-slide navigation
+- Do not convert the experience into one long page
+- Avoid tiny multi-panel dashboards
+
+---
+
+# 19. CSS Token Starter
+
+```css
+:root {
+  --iron-black: #111311;
+  --forge-charcoal: #1B1E1B;
+  --steel-grey: #343936;
+  --aged-iron: #505650;
+  --bone-paper: #D6D0BC;
+  --dust-paper: #AAA58F;
+  --warning-amber: #D99A2B;
+  --oxidized-red: #8B3429;
+  --machine-green: #73856A;
+  --cold-steel: #879294;
+  --parchment: #C2B68E;
+  --oil-shadow: #080A08;
+
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "IBM Plex Sans", Arial, sans-serif;
+  --font-editorial: "Cormorant Garamond", Georgia, serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-panel: 8px;
+
+  --motion-fast: 160ms;
+  --motion-medium: 320ms;
+  --motion-slow: 650ms;
+  --motion-cinematic: 1100ms;
+
+  --shadow-panel:
+    inset 0 0 0 1px rgba(255,255,255,0.02),
+    0 18px 45px rgba(0,0,0,0.38);
+}
+```
+
+---
+
+# 20. Sample Component Style
+
+## Industrial Panel
+
+```css
+.industrial-panel {
+  position: relative;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.025),
+      rgba(255,255,255,0)
+    ),
+    var(--forge-charcoal);
+  border: 1px solid var(--aged-iron);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-panel);
+}
+
+.industrial-panel::before,
+.industrial-panel::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--aged-iron);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.15);
+}
+
+.industrial-panel::before {
+  top: 10px;
+  left: 10px;
+}
+
+.industrial-panel::after {
+  right: 10px;
+  bottom: 10px;
+}
+```
+
+---
+
+## Status Lamp
+
+```css
+.status-lamp {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--aged-iron);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.7),
+    0 0 0 2px rgba(255,255,255,0.04);
+}
+
+.status-lamp.is-active {
+  background: var(--warning-amber);
+  box-shadow:
+    0 0 12px rgba(217,154,43,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.25);
+}
+```
+
+---
+
+## Machine Label
+
+```css
+.machine-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dust-paper);
+  border: 1px solid var(--aged-iron);
+  border-radius: var(--radius-xs);
+  background: rgba(0,0,0,0.22);
+}
+```
+
+---
+
+# 21. Implementation Rules for the AI or Developer
+
+When implementing this design:
+
+1. Preserve the industrial-medieval visual identity across every slide.
+2. Do not use random modern SaaS components.
+3. Do not use excessive rounded cards.
+4. Do not introduce bright gradients.
+5. Do not use neon cyberpunk colors.
+6. Do not use fantasy symbols.
+7. Keep every slide readable from a projector.
+8. Use decorative details sparingly.
+9. Prioritize storytelling over decoration.
+10. Ensure every slide feels like one section of the same machine.
+11. Reuse tokens and components consistently.
+12. Keep the visual world grounded in real materials.
+13. Make diagrams understandable to non-technical audiences.
+14. Use humor only as supporting micro-copy.
+15. Test the deck at 1920×1080.
+16. Check all slides for overflow.
+17. Ensure no visual effect reduces readability.
+18. Make sure reduced-motion mode remains usable.
+19. Keep the final result ready for an internal company presentation.
+20. The design should look memorable even when viewed without animation.
+
+---
+
+# 22. Final Creative Standard
+
+The final presentation should feel like:
+
+> An internal communication platform presented through the visual language of a forgotten European industrial fortress from 1986.
+
+It should communicate strength, structure, machinery, history, and operational discipline.
+
+The design must make RuBrik feel like a system that was not merely coded.
+
+It was **forged**.
